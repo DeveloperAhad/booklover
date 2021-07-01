@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <div class="row">
+        {% for book in object_list %}
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <a href="{{ book.get_absolute_url }}">
+                         <img src="{{ book.image.url }}" class="card-img-top">
+                        </a>
+                  <div class="card-body">
+                      <h5 class="card-title">{{ book.name }}</h5>
+                      <h6 class="card-title">{{ book.price }}$</h6>
+                      <a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

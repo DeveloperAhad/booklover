@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th scope="col">Photo</th>
+          <th scope="col">Title</th>
+          <th scope="col" class="text-center">Quantity</th>
+          <th scope="col" class="text-right">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for item in order_item %}
+        <tr>
+            <td><img width="80" height="80" src="{{ item.product.image.url }}" alt=""></td>
+            <td class="align-middle">{{ item.product.name }}</td>
+            <td class="align-middle text-center"><a class="cart_in_dec_btn" href="{% url 'remove_to_cart' item.product.slug %}">-</a>
+                <span class="ml-2 mr-2"> {{ item.quantity }} </span> <a class="cart_in_dec_btn" href="{% url 'add_to_cart' item.product.slug %}?cart_page=True">+</a></td>
+            <td class="align-middle text-right">{{ item.get_price }}$</td>
+        </tr>
+      {% empty %}
+          <tr>
+            <td>No data available</td>
+          <tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <div class="border-top pt-3 text-right">
+        <h4>{{ total }}$</h4>
+        <a href="{% url 'checkout' %}" class="btn btn-success mt-2">Checkout</a>
+    </div>
+{% endblock content %}

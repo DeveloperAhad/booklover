@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load tz %}
+{% block content %}
+    <h1 class="mb-4">Orders</h1>
+    {% for order in orders %}
+        <h5 class="border p-3">ID: {{ order.id }} -- Order Date: {{ order.ordered_date.date }} -- Order Time: {{ order.ordered_date.astimezone.time  }}</h5>
+    {% empty %}
+        <p>No order available!</p>
+    {% endfor %}
+
+{% endblock content %}

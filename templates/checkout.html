@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6">
+            <form method="POST">
+                {% csrf_token %}
+                <h5 class="mb-3">Shipping Address</h5>
+                <input type="text" class="form-control mb-3" placeholder="Full Name" name="name">
+                <input type="text" class="form-control mb-3" placeholder="Full address" name="full_address">
+                <input type="text" class="form-control mb-3" placeholder="Phone" name="phone">
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" name="default" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">Set Default</label>
+                </div>
+                {% if default_address != 'False' %}
+                    <input type="checkbox" name="default_shipping" id="default_shipping">
+                    <div class="card mb-3">
+                        <label for="default_shipping" class="mb-0"  style="cursor: pointer">
+                          <h5 class="card-header">Use Default Address</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">Name: {{ default_address.name }}</h5>
+                            <h5 class="card-title">Address: {{ default_address.full_address }}</h5>
+                            <h5 class="card-title">Phone: {{ default_address.phone }}</h5>
+                          </div>
+                        </label>
+                    </div>
+                {% endif%}
+                <h5 class="mb-3">Payment Method</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment_method" id="gridRadios1" value="COD" checked>
+                  <label class="form-check-label" for="gridRadios1">
+                    Cash on delivery
+                  </label>
+                </div>
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="radio" name="payment_method" id="gridRadios2" value="STRIP">
+                  <label class="form-check-label" for="gridRadios2">
+                    Strip
+                  </label>
+                </div>
+                <button class="btn btn-success" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    {{ form.errors }}
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 mb-5">
+            <img src="{{ book.image.url }}" class="card-img-top">
+        </div>
+        <div class="col-lg-6">
+            {% for category in book.category.all %}
+                <a href="" class="btn btn-info btn-sm">{{ category }}</a>
+            {% endfor %}
+            <h2 class="mb-4 pt-3">{{ book.name }}</h2>
+            <h4 class="mb-4">{{ book.price }}$</h4>
+            <p>{{ book.description }}</p>  <a href="{% url 'add_to_cart' book.slug %}" class="btn btn-primary">Add to cart</a>
+        </div>
+    </div>
+{% endblock content %}
