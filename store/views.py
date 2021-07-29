@@ -68,7 +68,7 @@ class Store(ListView):
 def Search(request):
     search = request.GET.get('search')
     if search is not None:
-        qs = Product.objects.filter(Q(name__contains=search) | Q(description__contains=search) | Q(category__name__contains=search))
+        qs = Product.objects.filter(Q(name__contains=search) | Q(description__contains=search) | Q(category__name__contains=search)).distinct()
         context = {
             'books': qs
         }
